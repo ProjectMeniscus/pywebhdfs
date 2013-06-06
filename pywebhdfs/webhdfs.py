@@ -82,7 +82,7 @@ class PyWebHdfsClient(object):
         optional_args = kwargs
         uri = self._create_uri(path, operations.MKDIRS, **optional_args)
 
-        response = requests.put(uri, allow_redirects=False)
+        response = requests.put(uri, allow_redirects=True)
 
         if response.status_code is not(httplib.OK):
             raise errors.PyWebHdfsException(response.text)
@@ -124,7 +124,7 @@ class PyWebHdfsClient(object):
     def list_dir(self, path):
 
         uri = self._create_uri(path, operations.LISTSTATUS)
-        response = requests.get(uri)
+        response = requests.get(uri, allow_redirects=True)
 
         if response.status_code is not(httplib.OK):
             raise errors.PyWebHdfsException(response.text)
