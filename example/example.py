@@ -4,6 +4,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 _LOG = logging.getLogger(__name__)
 
+
 example_dir = 'user/hdfs/example_dir'
 example_file = '{dir}/example.txt'.format(dir=example_dir)
 example_data = '01010101010101010101010101010101010101010101\n'
@@ -13,6 +14,7 @@ rename_dir = 'user/hdfs/example_rename'
 #create a new client instance
 hdfs = PyWebHdfsClient(host='localhost', port='50070',
                        user_name='hduser')
+
 
 #create a new directory for the example
 print('making new HDFS directory at: {0}\n'.format(example_dir))
