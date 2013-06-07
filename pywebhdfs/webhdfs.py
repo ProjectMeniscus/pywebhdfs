@@ -2,8 +2,7 @@ import httplib
 
 import requests
 
-import pywebhdfs.errors as errors
-import pywebhdfs.operations as operations
+from pywebhdfs import errors, operations
 
 
 class PyWebHdfsClient(object):
@@ -189,7 +188,7 @@ class PyWebHdfsClient(object):
         """
 
         uri = self._create_uri(path, operations.GETFILESTATUS)
-        response = requests.get(uri)
+        response = requests.get(uri, allow_redirects=True)
 
         if not response.status_code == httplib.OK:
             raise errors.PyWebHdfsException(response.text)

@@ -1,2 +1,2 @@
 [report]
-omit = etc/*,setup.py,*egg*,.tox/*,pywebhdfs/tests/*
+omit = etc/*,setup.py,*egg*,.tox/*,pywebhdfs/tests/*,pywebhdfs/example/*
