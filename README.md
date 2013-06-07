@@ -15,5 +15,5 @@ The initial release will prvide for WebHDFS basic file and directory operations 
 7.  Status of a File/Directory
 8.  List a Directory
 
-The docimentation for the Hadoop WebHDFS REST API can be found at [http://hadoop.apache.org/docs/r1.0.4/webhdfs.html](http://hadoop.apache.org/docs/r1.0.4/webhdfs.html)
+The documentation for the Hadoop WebHDFS REST API can be found at [http://hadoop.apache.org/docs/r1.0.4/webhdfs.html](http://hadoop.apache.org/docs/r1.0.4/webhdfs.html)
 
