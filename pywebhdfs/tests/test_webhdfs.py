@@ -292,7 +292,7 @@ class WhenTestingGetFileStatusOperation(unittest.TestCase):
         self.requests.get.return_value = self.response
         with patch('pywebhdfs.webhdfs.requests', self.requests):
             result = self.webhdfs.get_file_dir_status(self.path)
-            print result
+
         for key in result:
             self.assertEqual(result[key], self.file_status[key])
 
@@ -356,7 +356,7 @@ class WhenTestingListDirOperation(unittest.TestCase):
         self.requests.get.return_value = self.response
         with patch('pywebhdfs.webhdfs.requests', self.requests):
             result = self.webhdfs.list_dir(self.path)
-            print result
+
         for key in result:
             self.assertEqual(result[key], self.file_status[key])
 
