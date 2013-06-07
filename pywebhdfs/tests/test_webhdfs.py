@@ -45,8 +45,6 @@ class WhenTestingCreateOperation(unittest.TestCase):
         self.init_response = MagicMock()
         self.init_response.header = {'location': self.location}
         self.response = MagicMock()
-        self.file_location = 'file_location'
-        self.response.header = {'location': self.file_location}
 
     def test_create_throws_exception_for_no_redirect(self):
 
@@ -73,7 +71,7 @@ class WhenTestingCreateOperation(unittest.TestCase):
         self.requests.put.side_effect = [self.init_response, self.response]
         with patch('pywebhdfs.webhdfs.requests', self.requests):
             result = self.webhdfs.create_file(self.path, self.file_data)
-        self.assertEqual(result, self.file_location)
+        self.assertTrue(result)
 
 
 class WhenTestingAppendOperation(unittest.TestCase):

@@ -60,7 +60,7 @@ class PyWebHdfsClient(object):
         if not response.status_code == httplib.CREATED:
             raise errors.PyWebHdfsException(response.text)
 
-        return response.header['location']
+        return True
 
     def append_file(self, path, file_data, **kwargs):
         """
