@@ -1,5 +1,4 @@
 import httplib
-import urllib
 
 import requests
 
@@ -18,7 +17,7 @@ class PyWebHdfsClient(object):
 
         Keyword arguments:
         host -- the ip address or hostname of the HDFS namenode
-        port -- the port number for commincation with the WebHDFS namenode
+        port -- the port number for WebHDFS on the namenode
         user_name -- webHDFS user.name used for authentication
         """
 
@@ -61,7 +60,7 @@ class PyWebHdfsClient(object):
         init_response = requests.put(uri, data=file_data,
                                      allow_redirects=False)
 
-        if init_response.status_code is not(httplib.TEMPORARY_REDIRECT):
+        if not init_response.status_code == httplib.TEMPORARY_REDIRECT:
             raise errors.PyWebHdfsException(init_response.text)
 
         #Get the address provided in the location header of the
@@ -70,7 +69,7 @@ class PyWebHdfsClient(object):
         uri = init_response.headers['location']
         response = requests.put(uri, data=file_data)
 
-        if response.status_code is not(httplib.CREATED):
+        if not response.status_code == httplib.CREATED:
             raise errors.PyWebHdfsException(response.text)
 
         return response.header['location']
@@ -94,7 +93,7 @@ class PyWebHdfsClient(object):
         init_response = requests.post(uri, data=file_data,
                                       allow_redirects=False)
 
-        if init_response.status_code is not(httplib.TEMPORARY_REDIRECT):
+        if not init_response.status_code == httplib.TEMPORARY_REDIRECT:
             raise errors.PyWebHdfsException(init_response.text)
 
         #Get the address provided in the location header of the
@@ -103,7 +102,7 @@ class PyWebHdfsClient(object):
         uri = init_response.headers['location']
         response = requests.post(uri, data=file_data)
 
-        if response.status_code is not(httplib.OK):
+        if not response.status_code == httplib.OK:
             raise errors.PyWebHdfsException(response.text)
 
         return True
@@ -124,7 +123,7 @@ class PyWebHdfsClient(object):
 
         response = requests.get(uri, allow_redirects=True)
 
-        if response.status_code is not(httplib.OK):
+        if not response.status_code == httplib.OK:
             raise errors.PyWebHdfsException(response.text)
 
         return response.text
@@ -142,7 +141,7 @@ class PyWebHdfsClient(object):
 
         response = requests.put(uri, allow_redirects=True)
 
-        if response.status_code is not(httplib.OK):
+        if not response.status_code == httplib.OK:
             raise errors.PyWebHdfsException(response.text)
 
         return True
@@ -160,7 +159,7 @@ class PyWebHdfsClient(object):
 
         response = requests.put(uri, allow_redirects=True)
 
-        if response.status_code is not(httplib.OK):
+        if not response.status_code == httplib.OK:
             raise errors.PyWebHdfsException(response.text)
 
         return True
@@ -176,7 +175,7 @@ class PyWebHdfsClient(object):
         uri = self._create_uri(path, operations.DELETE, recursive=recursive)
         response = requests.delete(uri, allow_redirects=True)
 
-        if response.status_code is not(httplib.OK):
+        if not response.status_code == httplib.OK:
             raise errors.PyWebHdfsException(response.text)
 
         return True
@@ -192,7 +191,7 @@ class PyWebHdfsClient(object):
         uri = self._create_uri(path, operations.GETFILESTATUS)
         response = requests.get(uri)
 
-        if response.status_code is not(httplib.OK):
+        if not response.status_code == httplib.OK:
             raise errors.PyWebHdfsException(response.text)
 
         return response.json()
@@ -209,7 +208,7 @@ class PyWebHdfsClient(object):
         uri = self._create_uri(path, operations.LISTSTATUS)
         response = requests.get(uri, allow_redirects=True)
 
-        if response.status_code is not(httplib.OK):
+        if not response.status_code == httplib.OK:
             raise errors.PyWebHdfsException(response.text)
 
         return response.json()
@@ -244,17 +243,3 @@ class PyWebHdfsClient(object):
             auth=auth_param)
 
         return uri
-
-
-if __name__ == '__main__':
-
-    hdfs = PyWebHdfsClient(host='162.209.58.14', port='50070',
-                           user_name='hduser')
-    #hdfs.create_file('user/hdfs/client_test4.txt', 'mydatamydatamydata')
-    #hdfs.append_file('user/hdfs/client_test4.txt', 'mydatamydatamydata')
-    #print hdfs.read_file('user/hdfs/client_test4.txt', buffersize=32)
-    #print hdfs.make_dir('blah')
-    #print hdfs.rename_file_dir('blah', '/foo')
-    #print hdfs.delete_file_dir('foo', recursive='true')
-    print hdfs.get_file_dir_status('user/hdfs')
-    print hdfs.list_dir('user/hdfs')
