@@ -11,7 +11,7 @@ rename_dir = 'user/hdfs/example_rename'
 
 
 #create a new client instance
-hdfs = PyWebHdfsClient(host='162.209.58.14', port='50070',
+hdfs = PyWebHdfsClient(host='localhost', port='50070',
                        user_name='hduser')
 
 #create a new directory for the example
