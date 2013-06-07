@@ -28,17 +28,6 @@ class PyWebHdfsClient(object):
         self.base_uri = 'http://{host}:{port}/webhdfs/v1/'.format(
             host=self.host, port=self.port)
 
-    def temp_create_file(self, path, file_data, **kwargs):
-
-        optional_args = kwargs
-        uri = self._create_uri(path, operations.CREATE, **optional_args)
-        response = requests.put(uri, data=file_data, allow_redirects=True)
-
-        if not response.status_code == httplib.CREATED:
-            raise errors.PyWebHdfsException(response.text)
-
-        return response.header['location']
-
     def create_file(self, path, file_data, **kwargs):
         """
         Creates a new file on HDFS
