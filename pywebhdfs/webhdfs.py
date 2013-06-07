@@ -14,11 +14,11 @@ class PyWebHdfsClient(object):
 
     def __init__(self, host='localhost', port='50070', user_name=None):
         """
-        Create a new client
+        Create a new client for interacting with WebHDFS
 
         Keyword arguments:
         host -- the ip address or hostname of the HDFS namenode
-        port -- the port number for commincation with WebHDFS on the namenode
+        port -- the port number for commincation with the WebHDFS namenode
         user_name -- webHDFS user.name used for authentication
         """
 
@@ -110,7 +110,7 @@ class PyWebHdfsClient(object):
 
     def read_file(self, path, **kwargs):
         """
-        Reads from a file on HDFS
+        Reads from a file on HDFS  and returns the content
 
         WebHDFS REST call:
         GET http://<HOST>:<PORT>/webhdfs/v1/<PATH>?op=OPEN
@@ -183,7 +183,7 @@ class PyWebHdfsClient(object):
 
     def get_file_dir_status(self, path):
         """
-        Get the file_status of a single file or directory
+        Get the file_status of a single file or directory on HDFS
 
         WebHDFS REST call:
         GET http://<HOST>:<PORT>/webhdfs/v1/<PATH>?op=GETFILESTATUS
