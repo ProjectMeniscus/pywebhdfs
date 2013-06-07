@@ -1,0 +1,13 @@
+build/
+.coverage
+*.pyc
+.idea
+*.iml
+pywebhdfs.egg-info
+.tox
+*.DS_Store*
+nosetests.xml
+pywebhdfs/coverage.xml
+cache-store
+cache-config
+*~
