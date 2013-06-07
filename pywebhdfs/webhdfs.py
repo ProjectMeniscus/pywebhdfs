@@ -131,7 +131,6 @@ class PyWebHdfsClient(object):
 
         return response.json()
 
-
     def _create_uri(self, path, operation, **kwargs):
 
         path_param = path
@@ -147,7 +146,7 @@ class PyWebHdfsClient(object):
         keyword_params = str()
         for key in kwargs:
             keyword_params = '{params}&{key}={value}'.format(
-                params=keyword_params,key=key, value=kwargs[key])
+                params=keyword_params, key=key, value=kwargs[key])
 
         uri = '{base_uri}{path}{operation}{keyword_args}{auth}'.format(
             base_uri=self.base_uri, path=path_param,
@@ -160,7 +159,7 @@ class PyWebHdfsClient(object):
 if __name__ == '__main__':
 
     hdfs = PyWebHdfsClient(host='162.209.58.14', port='50070',
-                         user_name='hduser')
+                           user_name='hduser')
     #hdfs.create_file('user/hdfs/client_test4.txt', 'mydatamydatamydata')
     #hdfs.append_file('user/hdfs/client_test4.txt', 'mydatamydatamydata')
     #print hdfs.read_file('user/hdfs/client_test4.txt', buffersize=32)
