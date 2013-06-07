@@ -3,11 +3,11 @@ build/
 *.pyc
 .idea
 *.iml
-meniscus.egg-info
+pywebhdfs.egg-info
 .tox
 *.DS_Store*
 nosetests.xml
-meniscus/coverage.xml
+pywebhdfs/coverage.xml
 cache-store
 cache-config
 *~
