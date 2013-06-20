@@ -18,4 +18,5 @@ The initial release provides for basic WebHDFS file and directory operations inc
 The documentation for the Hadoop WebHDFS REST API can be found at [http://hadoop.apache.org/docs/r1.0.4/webhdfs.html](http://hadoop.apache.org/docs/r1.0.4/webhdfs.html)
 
 Pypi package: [https://pypi.python.org/pypi/pywebhdfs](https://pypi.python.org/pypi/pywebhdfs)
+Documentation: [http://pythonhosted.org/pywebhdfs/](http://pythonhosted.org/pywebhdfs/)
 
