@@ -5,7 +5,7 @@ from mock import MagicMock
 from mock import patch
 
 from pywebhdfs import errors
-from pywebhdfs.webhdfs import PyWebHdfsClient
+from pywebhdfs.webhdfs import PyWebHdfsClient, _raise_pywebhdfs_exception
 from pywebhdfs import operations
 
 
@@ -391,3 +391,22 @@ class WhenTestingCreateUri(unittest.TestCase):
                 op=op, key=mykey, val=myval, user=self.user_name)
         result = self.webhdfs._create_uri(self.path, op, mykey=myval)
         self.assertEqual(uri, result)
+
+
+class WhenTestingRaiseExceptions(unittest.TestCase):
+
+    def test_400_raises_bad_request(self):
+        with self.assertRaises(errors.BadRequest):
+            _raise_pywebhdfs_exception(httplib.BAD_REQUEST)
+
+    def test_401_raises_unuathorized(self):
+        with self.assertRaises(errors.Unauthorized):
+            _raise_pywebhdfs_exception(httplib.UNAUTHORIZED)
+
+    def test_404_raises_not_found(self):
+        with self.assertRaises(errors.FileNotFound):
+            _raise_pywebhdfs_exception(httplib.NOT_FOUND)
+
+    def test_all_other_raises_pywebhdfs_exception(self):
+        with self.assertRaises(errors.PyWebHdfsException):
+            _raise_pywebhdfs_exception(httplib.GATEWAY_TIMEOUT)

@@ -8,10 +8,11 @@ except ImportError:
 
 setup(
     name='pywebhdfs',
-    version='0.1',
+    version='0.2',
     description='Python wrapper for the Hadoop WebHDFS REST API',
     author='Steven D. Gonzales',
     author_email='stevendgonzales@gmail.com',
+    url='https://github.com/ProjectMeniscus/pywebhdfs',
     tests_require=[
         "mock",
         "nose",

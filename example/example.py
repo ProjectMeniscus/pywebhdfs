@@ -39,7 +39,7 @@ file_status = hdfs.get_file_dir_status(example_file)
 print file_status
 
 #read in the data for the file
-print('rading data from file at: {0}\n'.format(example_file))
+print('reading data from file at: {0}\n'.format(example_file))
 file_data = hdfs.read_file(example_file)
 print file_data
 
