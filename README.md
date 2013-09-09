@@ -1,3 +1,5 @@
+[![Build Status](http://jenkins.projectmeniscus.org/job/PyWebHDFS/badge/icon)](http://jenkins.projectmeniscus.org/job/PyWebHDFS/)
+
 # PyWebHDFS
 
 PyWebHDFS is a Python wrapper for the Hadoop WebHDFS REST API.
