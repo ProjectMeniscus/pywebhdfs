@@ -79,8 +79,9 @@ class PyWebHdfsClient(object):
         # initial response from the namenode and make the CREATE request
         #to the datanode
         uri = init_response.headers['location']
-        response = requests.put(uri, data=file_data,
-            headers={'content-type':'application/octet-stream'})
+        response = requests.put(
+            uri, data=file_data,
+            headers={'content-type': 'application/octet-stream'})
 
         if not response.status_code == httplib.CREATED:
             _raise_pywebhdfs_exception(response.status_code, response.text)
