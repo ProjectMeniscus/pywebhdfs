@@ -135,7 +135,9 @@ class PyWebHdfsClient(object):
         # initial response from the namenode and make the APPEND request
         #to the datanode
         uri = init_response.headers['location']
-        response = requests.post(uri, data=file_data)
+        response = requests.post(
+            uri, data=file_data,
+            headers={'content-type': 'application/octet-stream'})
 
         if not response.status_code == httplib.OK:
             _raise_pywebhdfs_exception(response.status_code, response.text)
