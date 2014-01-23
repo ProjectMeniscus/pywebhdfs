@@ -68,8 +68,7 @@ class PyWebHdfsClient(object):
         #make the initial CREATE call to the HDFS namenode
         optional_args = kwargs
         uri = self._create_uri(path, operations.CREATE, **optional_args)
-        init_response = requests.put(uri, data=file_data,
-                                     allow_redirects=False)
+        init_response = requests.put(uri, allow_redirects=False)
 
         if not init_response.status_code == httplib.TEMPORARY_REDIRECT:
             _raise_pywebhdfs_exception(
@@ -124,8 +123,7 @@ class PyWebHdfsClient(object):
         #make the initial APPEND call to the HDFS namenode
         optional_args = kwargs
         uri = self._create_uri(path, operations.APPEND, **optional_args)
-        init_response = requests.post(uri, data=file_data,
-                                      allow_redirects=False)
+        init_response = requests.post(uri, allow_redirects=False)
 
         if not init_response.status_code == httplib.TEMPORARY_REDIRECT:
             _raise_pywebhdfs_exception(
