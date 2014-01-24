@@ -60,6 +60,12 @@ class PyWebHdfsClient(object):
 
         >>> hdfs.create_file(my_file, my_data, overwrite=True, blocksize=64)
 
+        Or for sending data from file like objects:
+
+        >>> with open('file.data') as file_data:
+        >>>     hdfs.create_file(hdfs_path, data=file_data)
+
+
         Note: The create_file function does not follow automatic redirects but
         instead uses a two step call to the API as required in the
         WebHDFS documentation
