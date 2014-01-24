@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-pywebhdfs 0.2 documentation
+pywebhdfs 0.2.2 documentation
 =====================================
 
 Contents:
