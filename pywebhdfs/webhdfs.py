@@ -73,7 +73,7 @@ class PyWebHdfsClient(object):
 
         if not init_response.status_code == httplib.TEMPORARY_REDIRECT:
             _raise_pywebhdfs_exception(
-                init_response.status_code, init_response.text)
+                init_response.status_code, init_response.content)
 
         #Get the address provided in the location header of the
         # initial response from the namenode and make the CREATE request
@@ -84,7 +84,7 @@ class PyWebHdfsClient(object):
             headers={'content-type': 'application/octet-stream'})
 
         if not response.status_code == httplib.CREATED:
-            _raise_pywebhdfs_exception(response.status_code, response.text)
+            _raise_pywebhdfs_exception(response.status_code, response.content)
 
         return True
 
@@ -129,7 +129,7 @@ class PyWebHdfsClient(object):
 
         if not init_response.status_code == httplib.TEMPORARY_REDIRECT:
             _raise_pywebhdfs_exception(
-                init_response.status_code, init_response.text)
+                init_response.status_code, init_response.content)
 
         #Get the address provided in the location header of the
         # initial response from the namenode and make the APPEND request
@@ -140,7 +140,7 @@ class PyWebHdfsClient(object):
             headers={'content-type': 'application/octet-stream'})
 
         if not response.status_code == httplib.OK:
-            _raise_pywebhdfs_exception(response.status_code, response.text)
+            _raise_pywebhdfs_exception(response.status_code, response.content)
 
         return True
 
@@ -175,9 +175,9 @@ class PyWebHdfsClient(object):
         response = requests.get(uri, allow_redirects=True)
 
         if not response.status_code == httplib.OK:
-            _raise_pywebhdfs_exception(response.status_code, response.text)
+            _raise_pywebhdfs_exception(response.status_code, response.content)
 
-        return response.text
+        return response.content
 
     def make_dir(self, path, **kwargs):
         """
@@ -208,7 +208,7 @@ class PyWebHdfsClient(object):
         response = requests.put(uri, allow_redirects=True)
 
         if not response.status_code == httplib.OK:
-            _raise_pywebhdfs_exception(response.status_code, response.text)
+            _raise_pywebhdfs_exception(response.status_code, response.content)
 
         return True
 
@@ -237,7 +237,7 @@ class PyWebHdfsClient(object):
         response = requests.put(uri, allow_redirects=True)
 
         if not response.status_code == httplib.OK:
-            _raise_pywebhdfs_exception(response.status_code, response.text)
+            _raise_pywebhdfs_exception(response.status_code, response.content)
 
         return True
 
@@ -268,7 +268,7 @@ class PyWebHdfsClient(object):
         response = requests.delete(uri, allow_redirects=True)
 
         if not response.status_code == httplib.OK:
-            _raise_pywebhdfs_exception(response.status_code, response.text)
+            _raise_pywebhdfs_exception(response.status_code, response.content)
 
         return True
 
@@ -326,7 +326,7 @@ class PyWebHdfsClient(object):
         response = requests.get(uri, allow_redirects=True)
 
         if not response.status_code == httplib.OK:
-            _raise_pywebhdfs_exception(response.status_code, response.text)
+            _raise_pywebhdfs_exception(response.status_code, response.content)
 
         return response.json()
 
@@ -382,7 +382,7 @@ class PyWebHdfsClient(object):
         response = requests.get(uri, allow_redirects=True)
 
         if not response.status_code == httplib.OK:
-            _raise_pywebhdfs_exception(response.status_code, response.text)
+            _raise_pywebhdfs_exception(response.status_code, response.content)
 
         return response.json()
 
