@@ -137,9 +137,9 @@ class WhenTestingOpenOperation(unittest.TestCase):
         self.response = MagicMock()
         self.requests = MagicMock(return_value=self.response)
         self.path = 'user/hdfs'
-        self.file_data = '010101'
+        self.file_data = u'010101'
         self.response = MagicMock()
-        self.response.text = self.file_data
+        self.response.content = self.file_data
 
     def test_read_throws_exception_for_not_ok(self):
 
