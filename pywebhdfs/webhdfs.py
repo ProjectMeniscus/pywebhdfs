@@ -29,7 +29,7 @@ class PyWebHdfsClient(object):
         self.port = port
         self.user_name = user_name
 
-        #create base uri to be used in request operations
+        # create base uri to be used in request operations
         self.base_uri = 'http://{host}:{port}/webhdfs/v1/'.format(
             host=self.host, port=self.port)
 
@@ -71,7 +71,7 @@ class PyWebHdfsClient(object):
         WebHDFS documentation
         """
 
-        #make the initial CREATE call to the HDFS namenode
+        # make the initial CREATE call to the HDFS namenode
         optional_args = kwargs
         uri = self._create_uri(path, operations.CREATE, **optional_args)
         init_response = requests.put(uri, allow_redirects=False)
@@ -80,9 +80,9 @@ class PyWebHdfsClient(object):
             _raise_pywebhdfs_exception(
                 init_response.status_code, init_response.content)
 
-        #Get the address provided in the location header of the
+        # Get the address provided in the location header of the
         # initial response from the namenode and make the CREATE request
-        #to the datanode
+        # to the datanode
         uri = init_response.headers['location']
         response = requests.put(
             uri, data=file_data,
@@ -126,7 +126,7 @@ class PyWebHdfsClient(object):
         Append is not supported in Hadoop 1.x
         """
 
-        #make the initial APPEND call to the HDFS namenode
+        # make the initial APPEND call to the HDFS namenode
         optional_args = kwargs
         uri = self._create_uri(path, operations.APPEND, **optional_args)
         init_response = requests.post(uri, allow_redirects=False)
@@ -135,9 +135,9 @@ class PyWebHdfsClient(object):
             _raise_pywebhdfs_exception(
                 init_response.status_code, init_response.content)
 
-        #Get the address provided in the location header of the
+        # Get the address provided in the location header of the
         # initial response from the namenode and make the APPEND request
-        #to the datanode
+        # to the datanode
         uri = init_response.headers['location']
         response = requests.post(
             uri, data=file_data,
@@ -398,22 +398,22 @@ class PyWebHdfsClient(object):
 
         path_param = path
 
-        #setup the parameter represent the WebHDFS operation
+        # setup the parameter represent the WebHDFS operation
         operation_param = '?op={operation}'.format(operation=operation)
 
-        #configure authorization based on provided credentials
+        # configure authorization based on provided credentials
         auth_param = str()
         if self.user_name:
             auth_param = '&user.name={user_name}'.format(
                 user_name=self.user_name)
 
-        #setup any optional parameters
+        # setup any optional parameters
         keyword_params = str()
         for key in kwargs:
             keyword_params = '{params}&{key}={value}'.format(
                 params=keyword_params, key=key, value=str(kwargs[key]).lower())
 
-        #build the complete uri from the base uri and all configured params
+        # build the complete uri from the base uri and all configured params
         uri = '{base_uri}{path}{operation}{keyword_args}{auth}'.format(
             base_uri=self.base_uri, path=path_param,
             operation=operation_param, keyword_args=keyword_params,
