@@ -1,6 +1,10 @@
 import httplib
 
 import requests
+try:
+    from urllib.parse import quote
+except ImportError:
+    from urllib import quote
 
 from pywebhdfs import errors, operations
 
@@ -396,7 +400,7 @@ class PyWebHdfsClient(object):
         the <PATH>, <OPERATION>, and any provided optional arguments
         """
 
-        path_param = path
+        path_param = quote(path.encode('utf8'))
 
         # setup the parameter represent the WebHDFS operation
         operation_param = '?op={operation}'.format(operation=operation)
