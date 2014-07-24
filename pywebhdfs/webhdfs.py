@@ -239,6 +239,7 @@ class PyWebHdfsClient(object):
         >>> hdfs.rename_file_dir(current_dir, destination_dir)
         """
 
+        destination_path = '/' + destination_path.lstrip('/')
         uri = self._create_uri(path, operations.RENAME,
                                destination=destination_path)
 
