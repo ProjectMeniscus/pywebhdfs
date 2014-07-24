@@ -2,9 +2,9 @@ import httplib
 
 import requests
 try:
-    from urllib.parse import quote
+    from urllib.parse import quote, quote_plus
 except ImportError:
-    from urllib import quote
+    from urllib import quote, quote_plus
 
 from pywebhdfs import errors, operations
 
@@ -414,8 +414,12 @@ class PyWebHdfsClient(object):
         # setup any optional parameters
         keyword_params = str()
         for key in kwargs:
+            try:
+                value = quote_plus(kwargs[key].encode('utf8'))
+            except:
+                value = kwargs[key]
             keyword_params = '{params}&{key}={value}'.format(
-                params=keyword_params, key=key, value=str(kwargs[key]).lower())
+                params=keyword_params, key=key, value=value)
 
         # build the complete uri from the base uri and all configured params
         uri = '{base_uri}{path}{operation}{keyword_args}{auth}'.format(
