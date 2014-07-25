@@ -418,7 +418,7 @@ class PyWebHdfsClient(object):
             try:
                 value = quote_plus(kwargs[key].encode('utf8'))
             except:
-                value = kwargs[key]
+                value = str(kwargs[key]).lower()
             keyword_params = '{params}&{key}={value}'.format(
                 params=keyword_params, key=key, value=value)
 
