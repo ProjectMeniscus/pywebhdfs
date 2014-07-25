@@ -1,6 +1,10 @@
 import httplib
 
 import requests
+try:
+    from urllib.parse import quote, quote_plus
+except ImportError:
+    from urllib import quote, quote_plus
 
 from pywebhdfs import errors, operations
 
@@ -235,6 +239,7 @@ class PyWebHdfsClient(object):
         >>> hdfs.rename_file_dir(current_dir, destination_dir)
         """
 
+        destination_path = '/' + destination_path.lstrip('/')
         uri = self._create_uri(path, operations.RENAME,
                                destination=destination_path)
 
@@ -396,7 +401,7 @@ class PyWebHdfsClient(object):
         the <PATH>, <OPERATION>, and any provided optional arguments
         """
 
-        path_param = path
+        path_param = quote(path.encode('utf8'))
 
         # setup the parameter represent the WebHDFS operation
         operation_param = '?op={operation}'.format(operation=operation)
@@ -410,8 +415,12 @@ class PyWebHdfsClient(object):
         # setup any optional parameters
         keyword_params = str()
         for key in kwargs:
+            try:
+                value = quote_plus(kwargs[key].encode('utf8'))
+            except:
+                value = str(kwargs[key]).lower()
             keyword_params = '{params}&{key}={value}'.format(
-                params=keyword_params, key=key, value=str(kwargs[key]).lower())
+                params=keyword_params, key=key, value=value)
 
         # build the complete uri from the base uri and all configured params
         uri = '{base_uri}{path}{operation}{keyword_args}{auth}'.format(

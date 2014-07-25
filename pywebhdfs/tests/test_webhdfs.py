@@ -397,6 +397,21 @@ class WhenTestingCreateUri(unittest.TestCase):
         result = self.webhdfs._create_uri(self.path, op, mykey=myval)
         self.assertEqual(uri, result)
 
+    def test_create_uri_with_unicode_path(self):
+        op = operations.CREATE
+        mykey = 'mykey'
+        myval = 'myval'
+        path = u'die/Stra\xdfe'
+        quoted_path = 'die/Stra%C3%9Fe'
+        uri = 'http://{host}:{port}/webhdfs/v1/' \
+              '{path}?op={op}&{key}={val}' \
+              '&user.name={user}' \
+            .format(
+                host=self.host, port=self.port, path=quoted_path,
+                op=op, key=mykey, val=myval, user=self.user_name)
+        result = self.webhdfs._create_uri(path, op, mykey=myval)
+        self.assertEqual(uri, result)
+
 
 class WhenTestingRaiseExceptions(unittest.TestCase):
 
